@@ -1,6 +1,7 @@
+import java.sql.*;
 
 public class Cliente {
-
+	static Connection conexao;
 	private String nome;
 	private int cpf;
 	private int telefone;
@@ -11,6 +12,17 @@ public class Cliente {
 		this.cpf = cpf;
 		this.telefone = telefone;
 	}
+	public void insere(Cliente a) throws Exception
+	{
+		executa("INSERT INTO Cliente(nome, cpf, telefone) VALUES (" + a.getNome() + "," + a.getCpf() + "," + a.getTelefone() + ")");
+	}
+	
+	public static void executa(String sql)throws Exception{
+		Statement st = null;
+		st = conexao.createStatement();
+		st.executeUpdate(sql);
+		}
+
 	public void Status(Cliente a) {
 		
 		System.out.println("Nome: " + a.getNome() +" Cpf: "+ a.getCpf() + " Telefone: " + a.getTelefone());
