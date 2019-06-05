@@ -47,9 +47,8 @@ public class InterfaceApp extends JFrame{
 		Conexao con = new Conexao();
 		st = con.conexao.createStatement();
 		ResultSet rs = st.executeQuery("SELECT cpf, nome, telefone FROM Cliente");
-		System.out.println("----------------------------------------");
 		while (rs.next()) {
-			System.out.println("CPF:" +rs.getString(1) + "\tNome: "+ rs.getString(2)+ "\tTelefone: " + rs.getString(3) );
+			JOptionPane.showMessageDialog(null,"CPF:" +rs.getString(1) + "\tNome: "+ rs.getString(2)+ "\tTelefone: " + rs.getString(3) );
 			}
 		}
 	/**
@@ -93,17 +92,10 @@ public class InterfaceApp extends JFrame{
 		JButton btnListarClientes = new JButton("Listar Clientes");
 		btnListarClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Conexao con = new Conexao();
-		        String query = "SELECT * FROM Cliente";
-		        Statement st=null;
 				try {
-					st = con.conexao.createStatement();
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				try {
-					JOptionPane.showMessageDialog(null,st.executeQuery(query));
-				} catch (HeadlessException | SQLException e1) {
+					listar_cliente();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
